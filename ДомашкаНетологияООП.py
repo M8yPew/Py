@@ -81,24 +81,84 @@ best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress.append('Python')
 best_student.finished_courses.append('Not Python')
 
+not_best_student = Student('Leeroy', 'Jenkins', 'your_gender')
+not_best_student.courses_in_progress.append('Python')
+not_best_student.courses_in_progress.append('Not Python')
 
 cool_Lecturer = Lecturer('Some', 'Buddy')
 cool_Lecturer.courses_attached.append('Python')
 cool_Lecturer.courses_attached.append('Not Python')
 
+Lazy_Lecturer = Lecturer('Lazy', 'Lector')
+Lazy_Lecturer.courses_attached.append('Not Python')
+
 cool_Reviewer = Reviewer('Vasyan1', 'Vasyan1_surname')
 cool_Reviewer.courses_attached.append('Python')
 cool_Reviewer.courses_attached.append('Not Python')
 cool_Reviewer.rate_hw(best_student, 'Python', 7)
-
+cool_Reviewer.rate_hw(not_best_student, 'Python', 10)
+cool_Reviewer.rate_hw(not_best_student, 'Not Python', 2)
 
 best_student.rate_lecture(cool_Lecturer, 'Python', 5)
 best_student.rate_lecture(cool_Lecturer, 'Not Python', 3)
-
+best_student.rate_lecture(Lazy_Lecturer, 'Python', 6)
 
 print(best_student)
 print(cool_Lecturer)
 print(cool_Reviewer)
 
 
+test = cool_Lecturer.get_avg_grade() > best_student.get_avg_grade() # Вот так берём и сравниваем =)
+print('Результат сравнения: ' + str(test))
 
+# задание 4
+# 1
+def avg_grade_all_student(students, course):
+    total_grade = 0;
+    total_count = len(students)
+    student_count = 0
+    if total_count == 0:
+        return 0
+    for student in students:
+        if course in student.grades:
+            total_grade = total_grade + student.grades[course]
+            student_count = student_count + 1
+        else:
+            print('--- Студент ---' + '\n' + str(student) + '\n' + '--- не имеет оценок по курсу ' + str(course))
+
+    if student_count == 0:
+        return 0
+
+    result = total_grade / student_count
+
+    return result
+
+students = list()
+students.append(best_student)
+#students.append(not_best_student)
+
+print(avg_grade_all_student(students, 'Not Python'))
+
+# 2
+def avg_grade_all_lectors(lectors, course):
+    lectors_count = 0
+    total_grade = 0
+    total_count = len(lectors)
+    if total_count == 0:
+        return 0
+    for lector in lectors:
+        if course in lector.grades:
+            total_grade = total_grade + lector.grades[course]
+            lectors_count = lectors_count + 1
+        else:
+            print('--- Преподаватель ---' + '\n' + str(lector) + '\n' + '--- не имеет оценок по курсу ' + str(course))
+    if lectors_count == 0:
+        return 0
+    result = total_grade / lectors_count
+    return result
+
+lectors = list()
+lectors.append(cool_Lecturer)
+lectors.append(Lazy_Lecturer)
+
+print(avg_grade_all_lectors(lectors, 'Not Python'))
