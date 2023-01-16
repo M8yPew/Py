@@ -20,7 +20,6 @@ class Student:
 
     def get_avg_grade(self):
         grade_values = self.grades.values()
-        print(self.grades)
         if len(grade_values) > 0:
             avg_grade = sum(grade_values) / len(grade_values)
             return round(avg_grade, 3)
@@ -33,6 +32,19 @@ class Student:
                  + 'Средняя оценка за лекции: ' + str(self.get_avg_grade())
         return result
 
+    def __gt__(self, other):
+        avg1 = self.get_avg_grade()
+        avg2 = other.get_avg_grade()
+        return avg1 > avg2
+
+    def __lt__(self, other):
+        return self.get_avg_grade() < other.get_avg_grade()
+
+    def __ge__(self, other):
+        return self.get_avg_grade() >= other.get_avg_grade()
+
+    def __le__(self, other):
+        return self.get_avg_grade() <= other.get_avg_grade()
 
 class Mentor:
     def __init__(self, name, surname):
@@ -59,6 +71,19 @@ class Lecturer(Mentor):
                  + 'Средняя оценка за лекции: ' + str(self.get_avg_grade())
         return result
 
+    def __gt__(self, other):
+        avg1 = self.get_avg_grade()
+        avg2 = other.get_avg_grade()
+        return avg1 > avg2
+
+    def __lt__(self, other):
+        return self.get_avg_grade() < other.get_avg_grade()
+
+    def __ge__(self, other):
+        return self.get_avg_grade() >= other.get_avg_grade()
+
+    def __le__(self, other):
+        return self.get_avg_grade() <= other.get_avg_grade()
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -103,14 +128,6 @@ best_student.rate_lecture(cool_Lecturer, 'Python', 5)
 best_student.rate_lecture(cool_Lecturer, 'Not Python', 3)
 best_student.rate_lecture(Lazy_Lecturer, 'Python', 6)
 
-print(best_student)
-print(cool_Lecturer)
-print(cool_Reviewer)
-
-
-test = cool_Lecturer.get_avg_grade() > best_student.get_avg_grade() # Вот так берём и сравниваем =)
-print('Результат сравнения: ' + str(test))
-
 # задание 4
 # 1
 def avg_grade_all_student(students, course):
@@ -137,7 +154,7 @@ students = list()
 students.append(best_student)
 #students.append(not_best_student)
 
-print(avg_grade_all_student(students, 'Not Python'))
+#print(avg_grade_all_student(students, 'Not Python'))
 
 # 2
 def avg_grade_all_lectors(lectors, course):
@@ -161,4 +178,11 @@ lectors = list()
 lectors.append(cool_Lecturer)
 lectors.append(Lazy_Lecturer)
 
-print(avg_grade_all_lectors(lectors, 'Not Python'))
+
+#print(best_student)
+#(cool_Lecturer)
+#print(cool_Reviewer)
+
+print(cool_Lecturer < best_student)
+
+#print(avg_grade_all_lectors(lectors, 'Not Python'))
