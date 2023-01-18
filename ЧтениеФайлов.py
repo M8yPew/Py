@@ -1,3 +1,5 @@
+
+#Задание 1
 import os
 import datetime
 current = os.getcwd()
@@ -19,3 +21,16 @@ with open(full_path, 'r', encoding='utf-8') as file:
                           'measure': measure})
         file.readline()
         cook_book[food_name] = dishes
+
+#Задание 2
+dishes = list()
+dishes.append('Омлет')
+dishes.append('Фахитос')
+
+def get_shop_list_by_dishes(dishes, person_count):
+    result = {}
+    for dish in dishes:
+        print(dish)
+
+
+get_shop_list_by_dishes(dishes, 5)
